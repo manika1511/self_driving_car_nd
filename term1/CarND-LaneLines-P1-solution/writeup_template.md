@@ -33,7 +33,7 @@ After finding the edges, I defined the polygon region of interest so that it onl
 After this, I used Hough transform to find the lanes from canny edges. For this, I set the parameters of the hough transform function to include the points which form a line. The image after hough transform is as follows:
 ![hough_ini](https://user-images.githubusercontent.com/20146538/30404595-3e3565cc-989c-11e7-9bc9-62abfd797121.png)
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by taking the slope between the two points to be joined and then checking whether the slope represents the points in left or right line. Also, storing the left and right line coordinates and slopes in separate lists. After this, I averaged the left and right slopes. Also, I averaged the left and right points to get the average coordinates. I also calculated the left and right intercepts. I also calculated the end-point coordinates of the extended lines using the coordinates calculated above and the minimum value of the y-dimension of the region mask (320 in my case). Then, I used these coordinates to draw the left and right line.
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function by taking the slope between the two points to be joined and then checking whether the slope represents the points in left or right line. The left and right points are stored in separate lists. Then cv2 fitline function is used to fit the line into these points and then slope and intercept is calculated. This is done for multiple frames and then average value of left and right slopes and intercepts is calculated. Using these values, the end-point coordinates of the extended lines are calculated and the minimum value of the y-dimension of the region mask (320 in my case). Then, I used these coordinates to draw the left and right line.
 
 ![masked_lined](https://user-images.githubusercontent.com/20146538/30404837-7ffc434e-989d-11e7-976b-f82669b496c2.png)
 
@@ -42,9 +42,9 @@ After drawing the line on the masked image, I drew the line on the original imag
 
 ### 2. Identify potential shortcomings with your current pipeline
 The shortcoming which I can see as of now is that my algorithm doesn't work for the challenge video. It runns into an error of cannot convert NaN float into integer.
+Secondly, region selection is static
 
 ### 3. Suggest possible improvements to your pipeline
 
 A possible improvement would be to tune my algorithm to suit any type of input. I am working on removing the unaccepted lines and then choosing only the ones who's slopes match my requirement. I have tried removing the lines with slopes less than 0.5. 
-
-Another potential improvement could be to ...
+Another improvement can be making region selection more dynamic.
