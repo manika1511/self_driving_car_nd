@@ -3,54 +3,44 @@
 
 <img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
 
-Overview
----
+## Overview
 
-When we drive, we use our eyes to decide where to go.  The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle.  Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
+When we drive, we use our eyes to decide where to go. The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle. Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
 
-In this project you will detect lane lines in images using Python and OpenCV.  OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
+In this project, lane lines detection is done in images using Python and OpenCV. OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.
 
-To complete the project, two files will be submitted: a file containing project code and a file containing a brief write up explaining your solution. We have included template files to be used both for the [code](https://github.com/udacity/CarND-LaneLines-P1/blob/master/P1.ipynb) and the [writeup](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md).The code file is called P1.ipynb and the writeup template is writeup_template.md 
+### Reflection
 
-To meet specifications in the project, take a look at the requirements in the [project rubric](https://review.udacity.com/#!/rubrics/322/view)
+### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
+My pipeline consisted of 5 steps. First, I converted the images to grayscale, here is how the grayscale image looks:
 
-Creating a Great Writeup
----
-For this project, a great writeup should provide a detailed response to the "Reflection" section of the [project rubric](https://review.udacity.com/#!/rubrics/322/view). There are three parts to the reflection:
+![gray_scale](https://user-images.githubusercontent.com/20146538/30404133-ea4f6e82-9899-11e7-825c-66303ff8f960.png)
 
-1. Describe the pipeline
+Then, I applied Gaussian smoothing on it with kernel size 5, which helps to remove the noisy parts of the images which that gives more reliable outputs in next stage. The output looks like this:
+![gaussian](https://user-images.githubusercontent.com/20146538/30404180-3ed51b78-989a-11e7-8b9f-a4b1f0361a46.png)
 
-2. Identify any shortcomings
+Then, to find the image edges, I using canny algorithm. Select its parameters to find the required edges (strength of the edges to be identified). The output of canny function is as follows:
+![canny](https://user-images.githubusercontent.com/20146538/30404359-3ba8090a-989b-11e7-9e2c-b6b3706b4ff9.png)
 
-3. Suggest possible improvements
+After finding the edges, I defined the polygon region of interest so that it only includes the region which will actually be in the scope of the car camera and then masked the left out region. 
+![masked](https://user-images.githubusercontent.com/20146538/30404427-7f6c8eb8-989b-11e7-886c-f10d7c823567.png)
 
-We encourage using images in your writeup to demonstrate how your pipeline works.  
+After this, I used Hough transform to find the lanes from canny edges. For this, I set the parameters of the hough transform function to include the points which form a line. The image after hough transform is as follows:
+![hough_ini](https://user-images.githubusercontent.com/20146538/30404595-3e3565cc-989c-11e7-9bc9-62abfd797121.png)
 
-All that said, please be concise!  We're not looking for you to write a book here: just a brief description.
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function by taking the slope between the two points to be joined and then checking whether the slope represents the points in left or right line. The left and right points are stored in separate lists. Then cv2 fitline function is used to fit the line into these points and then slope and intercept is calculated. This is done for multiple frames and then average value of left and right slopes and intercepts is calculated. Using these values, the end-point coordinates of the extended lines are calculated and the minimum value of the y-dimension of the region mask (320 in my case). Then, I used these coordinates to draw the left and right line.
 
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup. Here is a link to a [writeup template file](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). 
+![masked_lined](https://user-images.githubusercontent.com/20146538/30404837-7ffc434e-989d-11e7-976b-f82669b496c2.png)
 
+After drawing the line on the masked image, I drew the line on the original image.
+![final](https://user-images.githubusercontent.com/20146538/30404872-aeccd076-989d-11e7-8d5c-064fc8bd7087.png)
 
-The Project
----
+### 2. Identify potential shortcomings with your current pipeline
+The shortcoming which I can see as of now is that my algorithm doesn't work for the challenge video. It runns into an error of cannot convert NaN float into integer.
+Secondly, region selection is static
 
-## If you have already installed the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) you should be good to go!   If not, you should install the starter kit to get started on this project. ##
+### 3. Suggest possible improvements to your pipeline
 
-**Step 1:** Set up the [CarND Term1 Starter Kit](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/8c82408b-a217-4d09-b81d-1bda4c6380ef/concepts/4f1870e0-3849-43e4-b670-12e6f2d4b7a7) if you haven't already.
-
-**Step 2:** Open the code in a Jupyter Notebook
-
-You will complete the project code in a Jupyter notebook.  If you are unfamiliar with Jupyter Notebooks, check out <A HREF="https://www.packtpub.com/books/content/basics-jupyter-notebook-and-python" target="_blank">Cyrille Rossant's Basics of Jupyter Notebook and Python</A> to get started.
-
-Jupyter is an Ipython notebook where you can run blocks of code and see results interactively.  All the code for this project is contained in a Jupyter notebook. To start Jupyter in your browser, use terminal to navigate to your project directory and then run the following command at the terminal prompt (be sure you've activated your Python 3 carnd-term1 environment as described in the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) installation instructions!):
-
-`> jupyter notebook`
-
-A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
-
-**Step 3:** Complete the project and submit both the Ipython notebook and the project writeup
-
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
-
+A possible improvement would be to tune my algorithm to suit any type of input. I am working on removing the unaccepted lines and then choosing only the ones who's slopes match my requirement. I have tried removing the lines with slopes less than 0.5. 
+Another improvement can be making region selection more dynamic.
