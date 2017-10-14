@@ -1,4 +1,4 @@
-#**Traffic Sign Recognition**
+# **Traffic Sign Recognition**
 
 The goals / steps of this project are the following:
 * Load the data set (see below for links to the project data set)
@@ -8,7 +8,7 @@ The goals / steps of this project are the following:
 * Analyze the softmax probabilities of the new images
 * Summarize the results with a written report
 
-###Data Set Summary & Exploration
+### Data Set Summary & Exploration
 
 I used the pandas library to calculate summary statistics of the traffic signs data set:
 
