@@ -13,7 +13,7 @@ The goals / steps of this project are the following:
 I used the pandas library to calculate summary statistics of the traffic signs data set:
 
 * The size of training set is 34799
-* The size of the validation set is ?
+* The size of the validation set is 4410
 * The size of test set is 12630
 * The shape of a traffic sign image is 32x32x3 as it is rgb scale
 * The number of unique classes/labels in the data set is 43
@@ -61,43 +61,40 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
+| Input         		| 32x32x1 Grayscale image   							| 
+| Convolution1 5x5     	| 1x1 stride, outputs 28x28x6 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
+| Max pooling	      	| 2x2 stride,  outputs 14x14x6 				|
+| Convolution2 5x5     	| 1x1 stride, outputs 10x10x16 	|
+| RELU 				|												|
+| Max pooling	(A)      	| 2x2 stride,  outputs 5x5x16 				|
+| Convolution3 5x5     	| 1x1 stride, outputs 1x1x400 	|
+| RELU		(B)			|												|
+| Flatten	output from A and B				|	output both 400											|
+| Concatenate flattened layers		|     output 800   									|
+|	Dropout Layer			|												|
+|		Fully connected layer				|			output 43									|
  
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-For training the model, I used started with a batch size of 150 but after optimization I landed up with 100 which gave me a better result. Number of Epochs 
+For training the model, I used started with a batch size of 170 but after optimization I landed up with 128 which gave me a better result. Number of Epochs, started of with 30 due to machine limitation. Then, used nvidia CUDA and tired 80 Epochs and got accuracy above 94%.
 
-To train the model, I used an ....
+To train the model, I started with a learning rate of 0.0008 which gave me very slow output. Then, I increased it to 0.001 and got the desired performance. 
 
-####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+I used AdamOptimizer for error minimization. I also tried GradientDescentOptimizer, but it didn't give good results.
+
+#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
 * training set accuracy of ?
 * validation set accuracy of ? 
 * test set accuracy of ?
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+First I chose the simple LeNet architecture studied in the class. I ran it for 50 epochs, but it gave around 88% accuracy. I tried adding dropout layer of 0.7 but it didn't show any significant improvement. I even tried adjusting the batch size and learning rate. But, accuracy didn't cross 90%. I was unable to access AWS instance so it took a lot of time to train. So, I searched on net and studied different architectures which have been used for such problems. It was then, I came across "Traffic Sign Recognition with Multi-Scale Convolutional Networks" by Pierre Sermanet and Yann LeCun where they had suggested an architecture for traffic signal classification. 
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+I implemented the suggested model and it showed significant improvement. In first 10 epochs, the accuracy was already above 93%. In this architecture three convolution layers were used with max pooling. Layer flatenning and layer concatenation followed by a dropout and fully connected layer. 
 
 ###Test a Model on New Images
 
