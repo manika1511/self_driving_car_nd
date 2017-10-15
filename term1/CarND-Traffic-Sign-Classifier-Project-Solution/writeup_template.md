@@ -53,6 +53,8 @@ Here is an example of an original image and an augmented image:
 
 The difference between the original data set and the augmented data set is that the augmented dataset has more samples for the ones which had very less samples which helps in training the model with better accuracy.
 
+![download](https://user-images.githubusercontent.com/20146538/31589518-c259fc44-b1b7-11e7-93fe-c534ada6139a.png)
+
 
 #### 2. Final model Architecture
 My final model architecture is dapted from Sermanet/LeCunn traffic sign classification journal article http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf.
