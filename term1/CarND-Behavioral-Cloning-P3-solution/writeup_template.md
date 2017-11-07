@@ -1,4 +1,4 @@
-#**Behavioral Cloning** 
+# Behavioral Cloning
 
 In this project, deep neural networks and convolutional neural networks are used to clone driving behavior. A model is trained, validated and tested using Keras. The model outputs a steering angle to an autonomous vehicle.
 
@@ -8,7 +8,7 @@ The goals / steps of this project are the following:
 * Train and validate the model with a training and validation set
 * Test that the model successfully drives around track one without leaving the road
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 * model.py containing the script to create and train the model
@@ -16,19 +16,19 @@ My project includes the following files:
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md or writeup_report.pdf summarizing the results
 
-####2. Submission includes functional code
+#### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.h5
 ```
 
-####3. Submission code is usable and readable
+#### 3. Submission code is usable and readable
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
-####1. An appropriate model architecture has been employed
+#### 1. An appropriate model architecture has been employed
 I have used the NVIDIA architecture for training the model. This model consists of 5 convolutional layers, one flatten layer and four dense layers. In addition to these layers, there is a Lambda layer for image normalization and a cropping layer to crop the image to just include the road area and remove the surrounding.
 
 Original Image
@@ -37,21 +37,21 @@ Original Image
 Cropped Image
 ![croppedimage](https://user-images.githubusercontent.com/20146538/32481376-eb368988-c347-11e7-841c-f41e99922582.png)
 
-####2. Attempts to reduce overfitting in the model
+#### 2. Attempts to reduce overfitting in the model
 
 The model was trained by splitting the dataset into train and validation to avoid overfitting. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track. 
 
-####3. Model parameter tuning
+#### 3. Model parameter tuning
 
 The model used an adam optimizer, so the learning rate was not tuned manually. The number of epochs were tuned. The epochs were kept till which the error reduced. So, here epochs were 3.
 
-####4. Appropriate training data
+#### 4. Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road. I tried to collect the data by running the simulator on the road center for two laps, then recovering from left and right for one lap and then one laps moving in opposite direction for one lap. I also tried to get quality data by running a lap in the second track. But, I was unable to get Quality data. So, finally I chose the dataset provided by Udacity. 
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+#### 1. Solution Design Approach
 
 The overall strategy for deriving a model architecture was to first normalize the input image and then crop it.
 
@@ -67,13 +67,13 @@ The final step was to run the simulator to see how well the car was driving arou
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
-####2. Final Model Architecture
+#### 2. Final Model Architecture
 
 The final model architecture consisted of a convolution neural network with the following layers and layer sizes:
 
 <img width="874" alt="screen shot 2017-11-06 at 10 51 46 pm" src="https://user-images.githubusercontent.com/20146538/32481871-10e4df98-c34a-11e7-96f3-6371e0554036.png">
 
-####3. Creation of the Training Set & Training Process
+#### 3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 ![originalimage](https://user-images.githubusercontent.com/20146538/32481374-ea4498c6-c347-11e7-82ef-494b3b17d5fe.png)
