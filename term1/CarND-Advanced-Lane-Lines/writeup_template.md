@@ -81,7 +81,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 Then I found the peaks using an histogram and then used 9 windows and then found the lanes by fitting my lane lines with a 2nd order polynomial using the code provided in lecture "Finding the lines" (code cells 40 through 42):
 
-![lanes_detected](https://user-images.githubusercontent.com/20146538/33810011-03a7217c-ddb4-11e7-8a1f-c8e8a7875212.png)
+![lanes_detected](https://user-images.githubusercontent.com/20146538/33820944-bc2cac60-de06-11e7-848a-b80548490a56.png)
 
 First, the peaks of the left and right halves of the histogram are found. These will be the starting point for the left and right lines respectively. Then, the pixels in the left and the right lane are found and then a 2 degree polynomial is fit to the lines.
 
@@ -93,12 +93,12 @@ I did this in code cells 43 through 44. First a scale for pixel to meter convers
 
 I implemented this step in code cells 48 through 49 in the function `lanes_on_image()`.  Here is an example of my result on a test image:
 
-![lane_on_image](https://user-images.githubusercontent.com/20146538/33810003-f791df08-ddb3-11e7-8f88-2fe1758b48ca.png)
+![lane_on_image](https://user-images.githubusercontent.com/20146538/33820947-c5aed092-de06-11e7-9fc2-fa4b41880031.png)
 
 ---
 
 ### Pipeline (video)
-Here's a [link to my video](https://drive.google.com/file/d/1UyIw1efRYtM3Ek-FY-2NUQ6RFa-b0Bi2/view?usp=sharing)
+Here's a [link to my video](https://drive.google.com/file/d/145T-D6a0usIFyowe0GouCd5PmeZ4U3In/view?usp=sharing)
 
 ---
 
