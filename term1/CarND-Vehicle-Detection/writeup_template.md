@@ -1,8 +1,3 @@
-## Writeup Template
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
-
 **Vehicle Detection Project**
 
 The goals / steps of this project are the following:
@@ -14,42 +9,24 @@ The goals / steps of this project are the following:
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
-[//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
-[video1]: ./project_video.mp4
-
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
----
-### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
-
-You're reading it!
+### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.    
 
 ### Histogram of Oriented Gradients (HOG)
 
 #### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
+The code for this step is contained in the eight code cell of the Jupyter notebook 'main.ipynb'.  
 
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+I started by reading in all the `vehicle` and `non-vehicle` images.  Here are some examples of the `vehicle` and `non-vehicle` classes:
 
-![alt text][image1]
+![sample_images](https://user-images.githubusercontent.com/20146538/34659479-fb03ee24-f3ed-11e7-830c-604482633a8e.png)
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed some images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+Here is an example using the `YUV` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-
-![alt text][image2]
+![hog_visualization](https://user-images.githubusercontent.com/20146538/34659557-ce499c16-f3ee-11e7-8b7f-f5a1eb1dfc4c.png)
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
@@ -58,6 +35,23 @@ I tried various combinations of parameters and...
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I trained a linear SVM using...
+
+| Color Space | orient | pix_per_cell | cell_per_block | HOG channels| Time to extract HOG features(in sec) | LinearSVM Accuracy |
+|:-----------:|:------:|:------------:|:--------------:|:-----------:|:----------------------------:|:------------------:|
+|    RGB   |  9       | 8 | 2 | ALL | 84.15 | 0.9752
+|    HSV   | 9 | 8 | 2 | ALL | 90.15 | 0.9900 |
+|    LUV | 9 | 8 | 2 | ALL | 95.28 | 0.987 |
+| HLS | 9 | 8 | 2 | ALL | 97.36 | 0.9899 |
+|YUV | 9 | 8|2|ALL|81.51|0.9901|
+|YCrCb|9|8|2|ALL|82.36|0.9789|
+|YCrCb|9|16|2|ALL|51.84|0.9885|
+|RGB|9|16|2|ALL|44.31|0.9555|
+|HSV|9|16|2|ALL|45.17|0.9721|
+|LUV|9|16|2|ALL|46.55|0.9628|
+|HLS|9|16|2|ALL|47.88|0.9668|
+|YUV|9|16|2|ALL|45.31|0.9716|
+|YUV|11|16|2|ALL|51.2|0.9741|
+|YUV|9|8|2|0|31.38|0.9535|
 
 ### Sliding Window Search
 
