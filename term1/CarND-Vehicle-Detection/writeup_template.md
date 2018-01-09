@@ -11,6 +11,10 @@ The goals / steps of this project are the following:
 
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.    
 
+**Dataset used**
+Here's the [vehicle dataset](https://drive.google.com/file/d/1M5HrGg0HzFymlEMfSseRWOfuIbUxpoVu/view?usp=sharing)
+Here's the [non-vehicle dataset](https://drive.google.com/file/d/16LwldHg6Uaq9XNaXWAPnogVi-PmrpJqW/view?usp=sharing)
+
 ### Histogram of Oriented Gradients (HOG)
 
 #### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
