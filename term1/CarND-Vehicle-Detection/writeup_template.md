@@ -70,35 +70,35 @@ The slide_window function takes in an image, start and stop positions and scale(
 
 The sliding window need to be of varying sizes and scale as the cars may be of different sizes based on their position w.r.t. the driving car. Following are the combination of parameters used for the final combined scale and parameter:
 
-ystart = 410, ystop = 510, scale = 1.0
+* ystart = 410, ystop = 510, scale = 1.0
 
 ![window_1](https://user-images.githubusercontent.com/20146538/34698865-3d554a4c-f48f-11e7-9e2e-bc01e0e00410.png)
 
-ystart = 425, ystop = 520, scale = 1.3
+* ystart = 425, ystop = 520, scale = 1.3
 
 ![window_13_sec](https://user-images.githubusercontent.com/20146538/34698864-3bdf7282-f48f-11e7-8c8c-97bb3b45e804.png)
 
-ystart = 417, ystop = 530, scale = 1.5
+* ystart = 417, ystop = 530, scale = 1.5
 
 ![window_13_sec](https://user-images.githubusercontent.com/20146538/34698931-94c61c70-f48f-11e7-980e-e736e1e9aabe.png)
 
-ystart = 400, ystop = 655, scale = 1.5
+* ystart = 400, ystop = 655, scale = 1.5
 
 ![window_15](https://user-images.githubusercontent.com/20146538/34698840-274fc8c6-f48f-11e7-9807-fbe0e95ebfc2.png)
 
-ystart = 411, ystop = 531, scale = 1.8
+* ystart = 411, ystop = 531, scale = 1.8
 
 ![window_18](https://user-images.githubusercontent.com/20146538/34698842-29f874e2-f48f-11e7-9c98-1a75fcfca09b.png)
 
-ystart = 401, ystop = 540, scale = 2.0
+* ystart = 401, ystop = 540, scale = 2.0
 
 ![window_2](https://user-images.githubusercontent.com/20146538/34698843-2b16c176-f48f-11e7-956a-89a206c43194.png)
 
-ystart = 400, ystop = 550, scale = 2.2
+* ystart = 400, ystop = 550, scale = 2.2
 
 ![window_22](https://user-images.githubusercontent.com/20146538/34698844-2ccc4784-f48f-11e7-811e-2ffc729fef2e.png)
 
-ystart = 400, ystop = 575, scale = 2.5
+* ystart = 400, ystop = 575, scale = 2.5
 
 ![window_25](https://user-images.githubusercontent.com/20146538/34698845-2ee39bbc-f48f-11e7-864e-4d20ef54c772.png)
 
