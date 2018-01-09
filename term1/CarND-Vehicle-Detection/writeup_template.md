@@ -20,7 +20,7 @@ The code for this step is contained in the eight code cell of the Jupyter notebo
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here are some examples of the `vehicle` and `non-vehicle` classes:
 
-![sample_images](https://user-images.githubusercontent.com/20146538/34659479-fb03ee24-f3ed-11e7-830c-604482633a8e.png)
+![sample_images](https://user-images.githubusercontent.com/20146538/34699691-a52d7618-f493-11e7-8c93-6b3fd660f5a9.png)
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed some images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
@@ -133,11 +133,11 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ### Here are six frames and their corresponding heatmaps:
 
-![heat_all](https://user-images.githubusercontent.com/20146538/34699390-deb6affa-f491-11e7-854c-729fa2df7ab6.png)
+![heat_all](https://user-images.githubusercontent.com/20146538/34699752-ee6a3672-f493-11e7-9ab9-cf481c281d29.png)
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
 
-![label_all](https://user-images.githubusercontent.com/20146538/34699536-c53b1b00-f492-11e7-8065-af73b75bb4d5.png)
+![label_all](https://user-images.githubusercontent.com/20146538/34699751-ebf11776-f493-11e7-81b6-a8de30a0d658.png)
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
 
