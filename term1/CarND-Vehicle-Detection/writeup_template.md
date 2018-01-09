@@ -117,6 +117,8 @@ Ultimately I searched on 7 scales using YUV 3-channel HOG features plus spatiall
 ### Video Implementation
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+
+Here's a [link to input video] (https://drive.google.com/file/d/1aJi9LLCHxM8fm7B1OP0f8ozGYsFu8Cpm/view?usp=sharing)
 Here's a [link to my video result](https://drive.google.com/file/d/1IlWB3WsLAW1tyfSglfIX8x1neBhi1WDx/view?usp=sharing)
 
 
